@@ -7,7 +7,7 @@ export default function Detail() {
     const[data,setdata]=useState({})
 
    useEffect(()=>{
-       axios.get("http://localhost:9000/api/v1/blog/"+para.category+"/"+para.id).then((response) => {
+       axios.get("https://young-cliffs-77803.herokuapp.com/api/v1/blog/"+para.category+"/"+para.id).then((response) => {
            setdata(response.data)
    })
   
