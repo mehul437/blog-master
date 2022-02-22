@@ -2,6 +2,7 @@ import React, { useState, useRef} from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
 import Article from './Article'
+import Thepost from './Thepost'
 
 export default function Latest() {
     const [detail,setdetail]=useState()
@@ -39,9 +40,10 @@ export default function Latest() {
                         ) 
                     }
                 </div>
-              
-         
+             
+             <Thepost data={detail}></Thepost> 
+                
             
-        </>
+            </>
     )
 }

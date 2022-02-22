@@ -1,34 +1,36 @@
-import axios from 'axios'
 import React, { useState, useRef} from 'react'
 import { useEffect } from 'react'
 import Post from './Post'
+import Storylatest from './Storylatest'
 
-export default function Thepost() {
-const path=window.location.pathname
-
-    const[detail,setdetail]=useState()
-    const [data, setdata] = useState([])
+export default function Thepost(props) {
+    const [data,setdata]=useState([])
     const temp = useRef()
     const[load,setload]=useState(false)
-
-    temp.current = fil
+   
+     temp.current=fil    
     let arr;
+   
     useEffect(() => {
 
-        axios.get("https://young-cliffs-77803.herokuapp.com/api/v1/blog" + path).then((response) => {
-            setdetail(response.data)
-            temp.current()
-        })
-
-    }, [path]);
-    function fil() {
-        arr = detail.filter((item) => item.type === 'post')
         
-        arr= arr.filter((item, index) => index < 3)
-        setdata([...arr])
-        }
+        temp.current()
+            
+        
+        
+
+    },[props.data])
+       function fil()
+            {
+                if(props.data!==undefined){
+           arr = props.data.filter((item) => item.type === 'post')
+
+           arr = arr.filter((item, index) => index < 3)
+           setdata([...arr])
+                }
+          }
     const change=()=>{
-        arr = detail.filter((item) => item.type === 'post')
+        arr = props.data.filter((item) => item.type === 'post')
         setdata([...arr])
         setload(true)
     }
@@ -51,6 +53,8 @@ const path=window.location.pathname
             {
                 load ? null : <h3 className='load'><button onClick={change}>Load more</button></h3>
             }
+
+            <Storylatest data={props.data}></Storylatest>
         </>
     )
 }
