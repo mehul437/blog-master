@@ -1,34 +1,26 @@
 import React, { useState, useRef} from 'react'
-import axios from 'axios'
+
 import { useEffect } from 'react'
 import Article from './Article'
 import Thepost from './Thepost'
 
-export default function Latest() {
-    const [detail,setdetail]=useState()
+export default function Latest(props) {
     const[data,setdata]=useState([])
     const temp=useRef()
-    const path=window.location.pathname
-    temp.current = fil
+    temp.current=fil
     let arr;
-    useEffect(() => {
-
-        axios.get("https://young-cliffs-77803.herokuapp.com/api/v1/blog" + path).then((response) => {
-            setdetail(response.data)
-            temp.current()
-        })
-
-
-
-    }, [path]);
-    function fil(){
-        arr=detail.filter((item) => item.type === 'latest')
-       
     
-       setdata([...arr])
-
+   useEffect(()=>{
+       temp.current()
        
+   },[props.data])
+    function fil(){
+      if(props.data!==undefined){
+          arr = props.data.filter((item) => item.type === 'latest')
 
+          setdata([...arr]) 
+
+      }
     }
     return (
         <>
@@ -41,7 +33,7 @@ export default function Latest() {
                     }
                 </div>
              
-             <Thepost data={detail}></Thepost> 
+             <Thepost data={props.data}></Thepost> 
                 
             
             </>

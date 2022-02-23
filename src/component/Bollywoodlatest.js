@@ -25,6 +25,7 @@ export default function Bollywoodlatest() {
        
 
     }, [path]);
+    
     function fil() {
         arr = detail.filter((item,index) => item.type === 'post' && index < 4 )
 
@@ -40,35 +41,42 @@ export default function Bollywoodlatest() {
         setdata([...arr])
         setload(true)
     }
-    return (
-        <>
-            <h2 className='thetitle'>{path.slice(1)}</h2>
-            <hr className='line'></hr>
-            <div className='latestmain'>
+    let item ;
+    if(detail!==undefined){
 
-                <div className='box'>
-                    {
-                        data.map((item) => <Post key={item.id} id={item.id} title={item.title} desc={item.description} date={item.date} image={item.image} />
-                        )
-                    }
-                    {
-                        load ? null : <h3 className='load'><button onClick={change}>Load more</button></h3>
-                    }
-                </div>
+    item= <>  <h2 className='thetitle'>Bollywood</h2>
+        <hr className='line'></hr>
+        <div className='latestmain'>
 
-                <div className='yside'>
-                    <h2>Top post</h2>
-                    <hr className='story'></hr>
-                    {
-                        story.map((item) => <Topstory key={item.id} id={item.id} title={item.title} desc={item.description} date={item.date} image={item.image}/>
+            <div className='box'>
+                {
+                    data.map((item) => <Post key={item.id} id={item.id} title={item.title} desc={item.description} date={item.date} image={item.image} />
+                    )
+                }
+                {
+                    load ? null : <h3 className='load'><button onClick={change}>Load more</button></h3>
+                }
+            </div>
+
+            <div className='yside'>
+                <h2>Top post</h2>
+                <hr className='story'></hr>
+                {
+                    story.map((item) => <Topstory key={item.id} id={item.id} title={item.title} desc={item.description} date={item.date} image={item.image} />
                     )}
 
-                    <div className='advert'>Advertisement</div>    
-                </div>
-               
-
+                <div className='advert'>Advertisement</div>
             </div>
-          
+
+
+        </div></>}
+        else{
+            item=<div id="loader"></div>
+        }
+    return (
+        
+        <>
+          {item}
         </>
     )
 }
